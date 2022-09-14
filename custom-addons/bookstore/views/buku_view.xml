@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- bookstore.book tree view -->
+    <record id="bookstore_book_view_tree" model="ir.ui.view">
+        <field name="name">DAFTAR BUKU</field>
+        <field name="model">bookstore.book</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="nama_pengarang"/>
+                <field name="tahun"/>
+                <field name="Publisher_id"/>
+                <field name="stock"/>
+                <field name="state"
+                    decoration-info="state == 'pemesanan'"
+                    decoration-success="state == 'ready'"
+                    decoration-danger="state == 'sold_out'"
+                    widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="model_name_view_kanban" model="ir.ui.view">
+        <field name="name">model_name.view.kanban</field>
+        <field name="model">bookstore.book</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="harga_jual"/>
+                <field name="id"/>
+                <field name="img_buku"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_image mr-1">
+                                <img t-att-src="kanban_image('bookstore.book', 'img_buku', record.id.raw_value)" alt="Product" class="o_image_64_contain"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_record_top mb-0">
+                                    <div class="o_kanban_record_headings">
+                                        <strong>
+                                            <field name="name"/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div name="product_lst_price" class="mt-1">
+                                    Harga: <field name="harga_jual" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- bookstore.book form view -->
+    <record id="bookstore_book_view_form" model="ir.ui.view">
+        <field name="name">FOMULIR DETAIL BUKU</field>
+        <field name="model">bookstore.book</field>
+        <field name="arch" type="xml">
+            <form string="Form Buku">
+                <header>
+                    <button string="PEMESANAN" name="action_pemesanan" type="object" class="btn btn-info" states="sold_out"/>
+                    <button string="READY" name="action_ready" type="object" class="btn btn-success" states="pemesanan,sold_out"/>
+                    <button string="SOLD OUT" name="action_sold" type="object" class="btn btn-danger" states="ready,pemesanan"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pemesanan,ready,sold_out"/>
+                </header>
+                <sheet>                        
+                    <field name="img_buku" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="name" string="Judul Buku"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="text-break" name="name" placeholder="e.g. Cheese Burger"/>
+                            </div>
+                        </h1>
+                    </div>
+                    <style>
+                        div[name="options"] .o_field_boolean {
+                            margin-left: 10px;
+                            margin-right: 0px;
+                        }
+                    </style>
+                    <notebook>
+                        <page name="info_buku" string="Detail Buku">
+                            <group>
+                                <group name="Informasi">
+                                    <field name="nama_pengarang"/>
+                                    <field name="tahun"/>
+                                    <field name="TypeBuku_id"/>                                    
+                                </group>
+                                <group name="sale">
+                                    <field name="Publisher_id"/>
+                                    <field name="harga_jual" class="oe_inline" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="stock" attrs="{'readonly' : [('state', '!=', 'sold_out')],}"/>
+                                </group>
+                            </group>
+                            <group string="Sinopsis">
+                                <field name="sinopsis" nolabel="1" placeholder="This note is only for Sinopsis."/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- mybookstore.book action window -->
+    <record id="bookstore_listbook_action" model="ir.actions.act_window">
+        <field name="name">DAFTAR BUKU</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bookstore.book</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="bookstore_book_menu_act" 
+              name="DAFTAR BUKU"
+              parent="bookstore_booklist_menu_categ" 
+              action="bookstore_listbook_action" 
+              sequence="10"/>
+</odoo>

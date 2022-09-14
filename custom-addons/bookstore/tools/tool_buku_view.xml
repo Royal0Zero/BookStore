@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- model.name action window -->
+    <record id="bookstore_book_tools_action" model="ir.actions.act_window">
+        <field name="name">Tools Daftar Buku</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bookstore.toolsbuku</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bookstore_book_tools_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="bookstore_add_book_action" model="ir.actions.act_window">
+        <field name="name">From Tambah Buku</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bookstore.book</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bookstore_book_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- model.name form view -->
+    <record id="bookstore_book_tools_view_form" model="ir.ui.view">
+        <field name="name">Tools Form Daftar Buku</field>
+        <field name="model">bookstore.toolsbuku</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button string="Tambah Buku" name="%(bookstore.bookstore_add_book_action)d" type="action" class="btn btn-warning"/>
+                </header>
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="Buku_id"/>
+                    </group>
+                    <footer>
+                        <button name="cancel" string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="bookstore_tools_buku_menu_act" 
+              name="Tools Buku" 
+              parent="bookstore_tools_menu_categ" 
+              action="bookstore_book_tools_action" 
+              sequence="10"/>
+
+</odoo>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- model.name tree view -->
+    <record id="bookstore_booktype_view_tree" model="ir.ui.view">
+        <field name="name">TYPE BUKU</field>
+        <field name="model">bookstore.booktype</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="Kode_Type"/>
+                <field name="Jumlah_Item"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- model.name form view -->
+    <record id="bookstore_type_view_form" model="ir.ui.view">
+        <field name="name">FORM TYPE BUKU</field>
+        <field name="model">bookstore.booktype</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Type Name"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="text-break" name="name" required="1"/>
+                            </div>
+                        </h1>
+                    </div>
+                    <style>
+                        div[name="options"] .o_field_boolean {
+                            margin-left: 10px;
+                            margin-right: 0px;
+                        }
+                    </style>
+                    <notebook>
+                        <page name="type_info" string="Type Details">
+                            <group>
+                                <field name="Kode_Type" readonly="1" force_save="1"/>
+                                <field name="Jumlah_Item"/>
+                                <field name="Buku_id"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="bookstore_type_action" model="ir.actions.act_window">
+        <field name="name">TYPE BUKU</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bookstore.booktype</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="bookstore_booktype_menu_act" 
+              name="TYPE BUKU" 
+              parent="bookstore_booklist_menu_categ" 
+              action="bookstore_type_action" 
+              sequence="15"/>
+
+</odoo>                                                                 

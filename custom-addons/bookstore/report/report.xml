@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="report_penjualan_pdf" model="ir.actions.report">
+        <field name="name">Faktur PDF</field>
+        <field name="model">bookstore.penjualan</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">bookstore.report_penjualan_pdf</field>
+        <field name="report_file">bookstore.report_penjualan_pdf</field>
+        <field name="binding_model_id" ref="model_bookstore_penjualan"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="report_buku_xlsx" model="ir.actions.report">
+        <field name="name">Buku Report Excel</field>
+        <field name="model">bookstore.book</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">bookstore.report_buku_xlsx</field>
+        <field name="report_file">bookstore.report_buku_xlsx</field>
+        <field name="binding_model_id" ref="model_bookstore_book"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="report_perlengkapan_xlsx" model="ir.actions.report">
+        <field name="name">Perlengkapan Report Excel</field>
+        <field name="model">bookstore.perlengkapan</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">bookstore.report_perlengkapan_xlsx</field>
+        <field name="report_file">bookstore.report_perlengkapan_xlsx</field>
+        <field name="binding_model_id" ref="model_bookstore_perlengkapan"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

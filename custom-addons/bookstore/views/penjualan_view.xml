@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sequence_bookstore_penjualan" model="ir.sequence">
+        <field name="name">Kode nota</field>
+        <field name="code">bookstore.penjualan</field>
+        <field name="active">TRUE</field>
+        <field name="prefix">ID - </field>
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- model.name tree view -->
+    <record id="bookstore_penjualan_view_tree" model="ir.ui.view">
+        <field name="name">DAFTAR PENJUALAN</field>
+        <field name="model">bookstore.penjualan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="tanggal_pembelian"/>
+                <field name="total_pembayaran"/>
+                <field name="state"
+                    decoration-danger="state == 'cancelled'"
+                    decoration-success="state == 'done'"
+                    decoration-warning="state == 'draft'"
+                    widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- model.name form view -->
+    <record id="bookstore_penjualan_view_form" model="ir.ui.view">
+        <field name="name">FORM DETAIL PEMBELIAN</field>
+        <field name="model">bookstore.penjualan</field>
+        <field name="arch" type="xml">
+            <form string="FORM PEMBELIAN">
+                <header>
+                    <button string="DRAFT" name="action_draft" type="object" class="btn" states="done"/>
+                    <button string="DONE" name="action_done" type="object" class="btn btn-success" states="draft"/>
+                    <button string="CANCEL" name="action_cancelled" type="object" class="btn btn-danger" states="done"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draf,done,cancelled"/>
+                </header>
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="name"/>
+                        <field name="tanggal_pembelian"/>
+                        <field name="total_pembayaran"/>
+                    </group>
+                    <group name="detail_pembelian" string="Details Barang">
+                        <field name="DetailsPenjualanBuku_id" attrs="{'readonly' : [('state', '!=', 'draft')]}">
+                            <tree editable="bottom">
+                                <field name="Buku_id" string="Judul Buku"/>
+                                <field name="harga"/>
+                                <field name="qty"/>
+                                <field name="Subtotal" sum="Total"/>
+                            </tree>
+                        </field>
+                        <field name="DetailsPenjualanPerlengkapan_id" attrs="{'readonly' : [('state', '!=', 'draft')]}">
+                            <tree editable="bottom">
+                                <field name="Perlengkapan_id" string="Nama Barang"/>
+                                <field name="harga"/>
+                                <field name="qty"/>
+                                <field name="Subtotal" sum="Total"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="bookstore_add_penjualan_action" model="ir.actions.act_window">
+        <field name="name">TRANSAKSI BARU</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bookstore.penjualan</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bookstore_penjualan_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="bookstore_penjualan_action" model="ir.actions.act_window">
+        <field name="name">DAFTAR TRANSAKSI PENJUALAN</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bookstore.penjualan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="bookstore_add_penjualan_menu_act" 
+              name="TRANSAKSI BARU" 
+              parent="bookstore_penjualan_menu_categ" 
+              action="bookstore_add_penjualan_action" 
+              sequence="10"/>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="bookstore_penjualan_menu_act" 
+              name="DAFTAR PENJUALAN" 
+              parent="bookstore_penjualan_menu_categ" 
+              action="bookstore_penjualan_action" 
+              sequence="15"/>
+
+</odoo>
