@@ -26,6 +26,9 @@ class Penjualan(models.Model):
                    ('cancelled', 'CANCELLED'),
                    ],
         required=True, readonly=True, default='draft')
+    
+    id_member = fields.Char(string='ID Member', compute="_compute_id_member", required=False)
+    diskon = fields.Char(string='Diskon')
 
     def action_draft(self):
         self.write({ 'state': 'draft'})
@@ -70,6 +73,17 @@ class Penjualan(models.Model):
                 else:
                     pass
         return record
+
+    @api.onchange('state')
+    def onchange_state(self):     
+        if (self.state == 'cancelled'):
+            a = []
+            for rec in self:
+                a = self.env['bookstore.detailpenjualanbuku'].search([('PenjualanBuku_id', '=', rec.id)])
+                print(a)
+            for ob in a:
+                print(str(ob.Buku_id.name) + ' ' + str(ob.qty))
+                ob.Buku_id.stock += ob.qty
     #------------------------------------------------------ PERLENGKAPAN ------------------------------------------------------#
     def unlink(self):
         if self.filtered(lambda line: line.state != 'draft'):

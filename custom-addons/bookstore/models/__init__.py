@@ -6,3 +6,4 @@ from . import Publisher
 from . import TypeBuku
 from . import Pelengkapan
 from . import Penjualan
+from . import Member

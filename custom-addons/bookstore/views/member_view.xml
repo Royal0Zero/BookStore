@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sequence_bookstore_member" model="ir.sequence">
+        <field name="name">ID MEMBER</field>
+        <field name="code">bookstore.member</field>
+        <field name="active">TRUE</field>
+        <field name="prefix">IDM - </field>
+        <field name="padding">6</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- model.name tree view -->
+    <record id="bookstore_member_view_tree" model="ir.ui.view">
+        <field name="name">DAFTAR CLUB MEMBER</field>
+        <field name="model">bookstore.member</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="id_member"/>
+                <field name="name"/>
+                <field name="alamat"/>
+                <field name="no_telp" widget="phone"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="bookstore_member_view_form" model="ir.ui.view">
+        <field name="name">FORM DETAIL MEMBER</field>
+        <field name="model">bookstore.member</field>
+        <field name="arch" type="xml">
+            <form string="Form Member">
+                <sheet>                        
+                    <field name="img_profile" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="name" string="Nama Member"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="text-break" name="name" placeholder="e.g. Cheese Burger"/>
+                            </div>
+                        </h1>
+                    </div>
+                    <style>
+                        div[name="options"] .o_field_boolean {
+                            margin-left: 10px;
+                            margin-right: 0px;
+                        }
+                    </style>
+                    <notebook>
+                        <page name="info_member" string="Informasi Member">
+                            <group>
+                                <group name="Informasi">
+                                    <field name="id_member"/>
+                                    <field name="alamat"/>
+                                    <field name="kode_pos"/>                                    
+                                </group>
+                                <group name="kontak">
+                                    <field name="email" widget="email"/>
+                                    <field name="no_telp"  widget="phone"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="bookstore_member_action" model="ir.actions.act_window">
+        <field name="name">DAFTAR CLUB MEMBER</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bookstore.member</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="bookstore_member_menu_act" 
+              name="DAFTAR CLUB MEMBER" 
+              parent="bookstore_member_menu_categ" 
+              action="bookstore_member_action" 
+              sequence="10"/>
+
+</odoo>

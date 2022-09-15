@@ -39,7 +39,7 @@
                 <header>
                     <button string="DRAFT" name="action_draft" type="object" class="btn" states="done"/>
                     <button string="DONE" name="action_done" type="object" class="btn btn-success" states="draft"/>
-                    <button string="CANCEL" name="action_cancelled" type="object" class="btn btn-danger" states="done"/>
+                    <button string="CANCEL" name="action_cancelled" type="object" class="btn btn-danger" states="done" confirm="Anda yakin membatalkan Quotation ini ?"/>
                     <field name="state" widget="statusbar" statusbar_visible="draf,done,cancelled"/>
                 </header>
                 <sheet>
