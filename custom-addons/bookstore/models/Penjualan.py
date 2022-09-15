@@ -26,9 +26,6 @@ class Penjualan(models.Model):
                    ('cancelled', 'CANCELLED'),
                    ],
         required=True, readonly=True, default='draft')
-    
-    id_member = fields.Char(string='ID Member', compute="_compute_id_member", required=False)
-    diskon = fields.Char(string='Diskon')
 
     def action_draft(self):
         self.write({ 'state': 'draft'})
@@ -112,7 +109,7 @@ class Penjualan(models.Model):
                 else:
                     pass
         return record
-        
+
     @api.constrains('name')
     def check (self):
         for rec in self:
