@@ -23,17 +23,23 @@
               name="PERLENGKAPAN" 
               parent="bookstore_menu_root" 
               sequence="20"/>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="bookstore_member_menu_categ" 
+              name="CLUB MEMBER" 
+              parent="bookstore_menu_root" 
+              sequence="25"/>
     
     <!-- This Menu Item Must have a parent -->
     <menuitem id="bookstore_penjualan_menu_categ" 
               name="TRANSAKSI" 
               parent="bookstore_menu_root" 
-              sequence="25"/>
+              sequence="30"/>
 
     <!-- This Menu Item Must have a parent -->
     <menuitem id="bookstore_tools_menu_categ" 
               name="TOOLS" 
               parent="bookstore_menu_root" 
-              sequence="30"/>
+              sequence="35"/>
 
 </odoo>

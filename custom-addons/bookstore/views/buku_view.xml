@@ -107,12 +107,34 @@
         </field>
     </record>
 
+    <!-- model.name search view -->
+    <record id="bookstore_book_view_search" model="ir.ui.view">
+        <field name="name">Search</field>
+        <field name="model">bookstore.book</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <filter name="state" string="Can be Purchase" domain="[('state', '=', 'ready')]"/>
+                <filter name="state" string="Sold Out" domain="[('state', '=', 'sold_out')]"/>
+                <filter name="state" string="Order" domain="[('state', '=', 'pemesanan')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Category Buku" name="TypeBuku_id" context="{'group_by':'TypeBuku_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <!-- mybookstore.book action window -->
     <record id="bookstore_listbook_action" model="ir.actions.act_window">
         <field name="name">DAFTAR BUKU</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">bookstore.book</field>
         <field name="view_mode">tree,form,kanban</field>
+        <field name="context">
+            {
+                'search_default_state': 1
+            }
+        </field>
     </record>
 
     <!-- This Menu Item must have a parent and an action -->

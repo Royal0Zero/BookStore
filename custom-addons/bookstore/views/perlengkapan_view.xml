@@ -69,6 +69,23 @@
         </field>
     </record>
 
+    <!-- model.name search view -->
+    <record id="bookstore_perlengkapan_view_search" model="ir.ui.view">
+        <field name="name">Search</field>
+        <field name="model">bookstore.perlengkapan</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <filter name="state" string="Can be Purchase" domain="[('state', '=', 'ready')]"/>
+                <filter name="state" string="Sold Out" domain="[('state', '=', 'sold_out')]"/>
+                <filter name="state" string="Order" domain="[('state', '=', 'pemesanan')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Jenis Satuan" name="satuan" context="{'group_by':'satuan'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <!-- model.name action window -->
     <record id="bookstore_perlengkapan_action" model="ir.actions.act_window">
         <field name="name">DAFTAR PERLENGKAPAN</field>

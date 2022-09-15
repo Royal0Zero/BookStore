@@ -8,3 +8,4 @@ access_bookstore_toolsperlengkapan,access.bookstore.toolsperlengkapan,model_book
 access_bookstore_penjualan,access.bookstore.penjualan,model_bookstore_penjualan,,1,1,1,1
 access_bookstore_detailpenjualanbuku,access.bookstore.detailpenjualanbuku,model_bookstore_detailpenjualanbuku,,1,1,1,1
 access_bookstore_detailpenjualanperlengkapan,access.bookstore.detailpenjualanperlengkapan,model_bookstore_detailpenjualanperlengkapan,,1,1,1,1
+access_bookstore_member,access.bookstore.member,model_bookstore_member,,1,1,1,1
