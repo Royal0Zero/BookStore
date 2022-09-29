@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- model.name tree view -->
+    <record id="bookstore_perlengakapan_view_tree" model="ir.ui.view">
+        <field name="name">model.name.view.tree</field>
+        <field name="model">bookstore.perlengkapan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="description"/>
+                <field name="satuan"/>
+                <field name="harga_jual"/>
+                <field name="stock"/>
+                <field name="state"
+                    decoration-info="state == 'pemesanan'"
+                    decoration-success="state == 'ready'"
+                    decoration-danger="state == 'sold_out'"
+                    widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- bookstore.book form view -->
+    <record id="bookstore_perlengakapan_view_form" model="ir.ui.view">
+        <field name="name">FOMULIR DETAIL PERLENGKAPAN</field>
+        <field name="model">bookstore.perlengkapan</field>
+        <field name="arch" type="xml">
+            <form string="Form Perlengkapan">
+                <header>
+                    <button string="PEMESANAN" name="action_pemesanan" type="object" class="btn btn-info" states="sold_out"/>
+                    <button string="READY" name="action_ready" type="object" class="btn btn-success" states="pemesanan,sold_out"/>
+                    <button string="SOLD OUT" name="action_sold" type="object" class="btn btn-danger" states="ready,pemesanan"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pemesanan,ready,sold_out"/>
+                </header>
+                <sheet>                        
+                    <field name="img_perlengkapan" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="name" string="Nama Barang Perlengkapan"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="text-break" name="name" placeholder="e.g. Cheese Burger"/>
+                            </div>
+                        </h1>
+                    </div>
+                    <style>
+                        div[name="options"] .o_field_boolean {
+                            margin-left: 10px;
+                            margin-right: 0px;
+                        }
+                    </style>
+                    <notebook>
+                        <page name="info_perlengkapan" string="Detail Barang">
+                            <group>
+                                <group name="Informasi">
+                                    <field name="satuan"/>
+                                    <field name="harga_jual" class="oe_inline" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                    <field name="stock" attrs="{'readonly' : [('state', '!=', 'sold_out')],}"/>                                    
+                                </group>
+                            </group>
+                            <group string="Discription">
+                                <field name="description" nolabel="1" placeholder="This note is only for Description."/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- model.name search view -->
+    <record id="bookstore_perlengkapan_view_search" model="ir.ui.view">
+        <field name="name">Search</field>
+        <field name="model">bookstore.perlengkapan</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <filter name="state" string="Can be Purchase" domain="[('state', '=', 'ready')]"/>
+                <filter name="state" string="Sold Out" domain="[('state', '=', 'sold_out')]"/>
+                <filter name="state" string="Order" domain="[('state', '=', 'pemesanan')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Jenis Satuan" name="satuan" context="{'group_by':'satuan'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="bookstore_perlengkapan_action" model="ir.actions.act_window">
+        <field name="name">DAFTAR PERLENGKAPAN</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bookstore.perlengkapan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="bookstore_perlengkapan_menu_act" 
+              name="DAFTAR PERLENGKAPAN" 
+              parent="bookstore_perlengkapan_menu_categ" 
+              action="bookstore_perlengkapan_action" 
+              sequence="10"/>
+
+</odoo>

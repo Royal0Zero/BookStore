@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bookstore_book,access.bookstore.book,model_bookstore_book,,1,1,1,1
+access_bookstore_publisher,access.bookstore.publisher,model_bookstore_publisher,,1,1,1,1
+access_bookstore_booktype,access.bookstore.booktype,model_bookstore_booktype,,1,1,1,1
+access_bookstore_perlengkapan,access.bookstore.perlengkapan,model_bookstore_perlengkapan,,1,1,1,1
+access_bookstore_toolsbuku,access.bookstore.toolsbuku,model_bookstore_toolsbuku,,1,1,1,1
+access_bookstore_toolsperlengkapan,access.bookstore.toolsperlengkapan,model_bookstore_toolsperlengkapan,,1,1,1,1
+access_bookstore_penjualan,access.bookstore.penjualan,model_bookstore_penjualan,,1,1,1,1
+access_bookstore_detailpenjualanbuku,access.bookstore.detailpenjualanbuku,model_bookstore_detailpenjualanbuku,,1,1,1,1
+access_bookstore_detailpenjualanperlengkapan,access.bookstore.detailpenjualanperlengkapan,model_bookstore_detailpenjualanperlengkapan,,1,1,1,1
+access_bookstore_member,access.bookstore.member,model_bookstore_member,,1,1,1,1

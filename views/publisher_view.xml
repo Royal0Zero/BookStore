@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- bookstore.publisher tree view -->
+    <record id="bookstore_publisher_view_tree" model="ir.ui.view">
+        <field name="name">DAFTAR PUBLISHER</field>
+        <field name="model">bookstore.publisher</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="name"/>
+                <field name="alamat"/>
+                <field name="no_telp"/>
+                <field name="no_tax"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- bookstore.publisher form view -->
+    <record id="mybook_publisher_view_form" model="ir.ui.view">
+        <field name="name">FORM DETAIL PUBLISHER</field>
+        <field name="model">bookstore.publisher</field>
+        <field name="arch" type="xml">
+            <form string="Publisher Info">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Publisher Name"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="text-break" name="name" placeholder="e.g. Cheese Burger"/>
+                            </div>
+                        </h1>
+                    </div>
+                    <style>
+                        div[name="options"] .o_field_boolean {
+                            margin-left: 10px;
+                            margin-right: 0px;
+                        }
+                    </style>
+                    <notebook>
+                        <page name="infopublisher" string="Publisher Details">
+                            <group>
+                                <group>
+                                    <field name="alamat"/>
+                                    <field name="no_telp"/>
+                                </group>    
+                                <group>
+                                    <field name="email"/>
+                                    <field name="no_tax"/>                                    
+                                </group>                        
+                            </group>
+                        </page>
+                        <page name="producpublisher" string="Publisher Product">
+                            <group>
+                                <field name="Buku_id"/>                                                   
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- bookstore.publisher action window -->
+    <record id="bookstore_publisher_action" model="ir.actions.act_window">
+        <field name="name">DAFTAR PUBLISHER</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bookstore.publisher</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="bookstore_publisher_menu_act" 
+              name="PUBLISHER LISTS" 
+              parent="bookstore_publisher_menu_categ" 
+              action="bookstore_publisher_action" 
+              sequence="10"/>
+</odoo>

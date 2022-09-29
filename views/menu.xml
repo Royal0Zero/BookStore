@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="bookstore_menu_root" 
+              name="BOOK STORE" 
+              sequence="10"/>
+    
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="bookstore_booklist_menu_categ" 
+              name="BUKU" 
+              parent="bookstore_menu_root" 
+              sequence="10"/>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="bookstore_publisher_menu_categ" 
+              name="PUBLISHER" 
+              parent="bookstore_menu_root" 
+              sequence="15"/>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="bookstore_perlengkapan_menu_categ" 
+              name="PERLENGKAPAN" 
+              parent="bookstore_menu_root" 
+              sequence="20"/>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="bookstore_member_menu_categ" 
+              name="CLUB MEMBER" 
+              parent="bookstore_menu_root" 
+              sequence="25"/>
+    
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="bookstore_penjualan_menu_categ" 
+              name="TRANSAKSI" 
+              parent="bookstore_menu_root" 
+              sequence="30"/>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="bookstore_tools_menu_categ" 
+              name="TOOLS" 
+              parent="bookstore_menu_root" 
+              sequence="35"/>
+
+</odoo>
